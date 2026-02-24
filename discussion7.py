@@ -118,6 +118,11 @@ def write_summary_csv(out_filename, avg_prices):
         #Write header row
         writer.writerow(['neighbourhood_group, room_type, average_price'])
 
+        for key, val in avg_prices.items():
+            row = [key[0], key[1], val]
+            writer.writerow(row)
+            
+
 
     pass
 
