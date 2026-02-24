@@ -30,7 +30,21 @@ def load_listings(f):
     base_path = os.path.abspath(os.path.dirname(__file__))
     full_path = os.path.join(base_path, f)
 
-    # TODO: Read the CSV using csv.reader and convert it to a list a dictionaries
+    # TODO: Read the CSV using csv.reader and convert it to a list of dictionaries
+    with open(full_path) as file: 
+        reader = csv.reader(file)
+        header = next(reader)
+        print("header", header)
+        listings = []
+        for row in reader: 
+            row_dict = {}
+            for i, column_name in enumerate(header): #enumerate stores the index and variable within the header
+                row_dict[column_name] = row[1]
+                listings.append(row_dict)
+    return listings
+
+
+
     pass
 
 ###############################################################################
@@ -51,6 +65,16 @@ def calculate_avg_price_by_neighbourhood_group_and_room(listings):
         dict mapping (neighbourhood_group, room_type) -> average_price (float)
         e.g. { ('Downtown', 'Entire home/apt'): 123.45, ... }
     """
+    price_sums = {}
+    price_counts = {}
+
+    for listing in listings: 
+        neighbourhood_group = listing['neighbourhood_group']
+        room_type = listing['room_type']
+        price = float(listing['price'])
+
+        #create a tuple key for the returned dictionary
+        key = (neighbourhood_group, room_type)
     pass
 
 
