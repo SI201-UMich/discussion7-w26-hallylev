@@ -75,6 +75,21 @@ def calculate_avg_price_by_neighbourhood_group_and_room(listings):
 
         #create a tuple key for the returned dictionary
         key = (neighbourhood_group, room_type)
+
+        if key in price_sums:
+            price_sums[key] += price
+            price_counts[key] += 1
+
+        else:
+            price_sums[key] = price
+            price_counts[key] = 1
+        
+        #calculate average 
+        avg_prices = {}
+        for key in price_sums:
+            avg_prices[key] = price_sums[key] / price_counts[key] 
+
+        return avg_prices
     pass
 
 
